@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RoutingController extends Controller
 {
@@ -54,6 +56,24 @@ class RoutingController extends Controller
         
         return $this->redirect($this->generateUrl('jmlamo_demo_routing_contact'));
     }
+    
+    /**
+     * @Route("/routing/year.{_format}", defaults={"_format": "html"})
+     */
+    public function yearAction($_format)
+    {
+        $data = array('year' => date('Y'));
+    
+        switch ($_format) {
+            case 'html' :
+                return $this->render('JmlamoDemoBundle:Routing:year.html.twig', $data);
+                break;
+                
+            case 'json' :
+                return new JsonResponse($data, Response::HTTP_OK);
+                break;
+        }
+    }    
 
     /**
      * @Route("/routing/{page}", defaults={"page" = 1}, requirements={"page": "\d+"})

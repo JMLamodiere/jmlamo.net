@@ -12,4 +12,6 @@
 <p><a href="{{ url('jmlamo_demo_routing_show', {'slug': 'my-blog-post'}) }}">Absolute link to &quot;my blog post&quot;</a></p>
 <p><a href="{{ url('jmlamo_demo_routing_browser') }}">Browser user-agent detection</a></p>
 <p><a href="{{ url('jmlamo_demo_routing_contact') }}">Method detection (GET/POST)</a></p>
+<p><a href="{{ url('jmlamo_demo_routing_year') }}">Year, html format</a></p>
+<p><a href="{{ url('jmlamo_demo_routing_year', {'_format': 'json'}) }}">Year, json format</a></p>
 {% endblock %}
