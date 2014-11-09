@@ -6,6 +6,10 @@
     <dt>Page :</dt>
     <dd>{{ page }}</dd>
 </dl>
+<p><a href="{{ path('jmlamo_demo_routing_index', {'page': 1}) }}">&lt;&lt; Page 1</a></p>
+<p><a href="{{ path('jmlamo_demo_routing_index', {'page': 2}) }}">Page 2 &gt;&gt;</a></p>
 <p><a href="{{ path('jmlamo_demo_routing_show', {'slug': 'my-blog-post'}) }}">Relative link to &quot;my blog post&quot;</a></p>
 <p><a href="{{ url('jmlamo_demo_routing_show', {'slug': 'my-blog-post'}) }}">Absolute link to &quot;my blog post&quot;</a></p>
+<p><a href="{{ url('jmlamo_demo_routing_browser') }}">Browser user-agent detection</a></p>
+<p><a href="{{ url('jmlamo_demo_routing_contact') }}">Method detection (GET/POST)</a></p>
 {% endblock %}
