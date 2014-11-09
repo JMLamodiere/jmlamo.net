@@ -51,9 +51,9 @@ class HelloController extends Controller
     /**
      * @Route("/hello/json")
      */
-    public function jsonredirAction($name = null)
+    public function jsonredirAction()
     {
-        return $this->redirect($this->generateUrl('jmlamo_demo_hello_json', array('name' => 'John')), 301);
+        return $this->redirect($this->generateUrl('jmlamo_demo_hello_json', array('name' => 'John')), 302);
     }    
     
     /**
@@ -92,7 +92,7 @@ class HelloController extends Controller
     {
         //if no firstname, redirect 301 with au firstname
         if (empty($firstname)) {
-            return $this->redirect($this->generateUrl('jmlamo_demo_hello_index', array('firstname' => 'John')), 301);
+            return $this->redirect($this->generateUrl('jmlamo_demo_hello_index', array('firstname' => 'John')), 302);
         }
     
     
