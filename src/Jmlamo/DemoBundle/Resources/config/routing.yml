@@ -1,3 +1,8 @@
-jmlamo_demo_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: JmlamoDemoBundle:Default:index }
+# jmlamo_demo_homepage:
+    # path:     /hello/{name}
+    # defaults: { _controller: JmlamoDemoBundle:Default:index }
+
+jmlamo_demo:
+    resource: "@JmlamoDemoBundle/Controller/"
+    type:     annotation
+    prefix:   /
