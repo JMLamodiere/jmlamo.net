@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+{% block title %}JmlamoDemoBundle:Routing:contact{% endblock %}
+{% block body %}
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-message">
+        <em>Notice</em>: {{ flashMessage }}
+    </div>
+{% endfor %}
+
+<h1>Contact form (GET method)</h1>
+
+<dl>
+    <dt>Last name received :</dt>
+    <dd>{{ name }}</dd>
+</dl>
+
+<form method="POST" action="{{ path('jmlamo_demo_routing_contact') }}">
+    <p><label for="name">Name :</label> <input type="text" name="name" id="name"></p>
+    <input type="submit" value="OK">
+</form>
+{% endblock %}
