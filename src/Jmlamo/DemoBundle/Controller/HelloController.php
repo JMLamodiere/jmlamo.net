@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HelloController extends Controller
 {
@@ -48,6 +49,34 @@ class HelloController extends Controller
     }
     
     /**
+     * @Route("/hello/json")
+     */
+    public function jsonredirAction($name = null)
+    {
+        return $this->redirect($this->generateUrl('jmlamo_demo_hello_json', array('name' => 'John')), 301);
+    }    
+    
+    /**
+     * @Route("/hello/json/{name}.json")
+     */
+    public function jsonAction(Request $request, $name)
+    {
+        $data = array(
+            'name' => $name,
+        );
+        
+        //adding all query string datas
+        //$data += $request->query->all();
+        
+        $response = new JsonResponse($data, Response::HTTP_OK);
+        
+        // $response = new Response(json_encode($data), Response::HTTP_OK);
+        // $response->headers->set('Content-Type', 'application/json');
+        
+        return $response;
+    }     
+    
+    /**
      * @Route("/hello/god")
      */
     public function godAction()
@@ -71,5 +100,5 @@ class HelloController extends Controller
             'firstname' => $firstname,
             'lastname' => $lastname,
         );
-    }
+    }   
 }
