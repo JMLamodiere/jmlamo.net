@@ -1,0 +1,3 @@
+jmlamo_demo_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: JmlamoDemoBundle:Default:index }

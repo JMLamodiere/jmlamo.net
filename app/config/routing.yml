@@ -1,0 +1,4 @@
+jmlamo_demo:
+    resource: "@JmlamoDemoBundle/Resources/config/routing.yml"
+    prefix:   /
+
