@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+{% block title %}JmlamoDemoBundle:Routing:browser{% endblock %}
+{% block body %}
+
+<h1>Chrome User-Agent detection</h1>
+{% if chrome %}
+    <p>You are using chrome.</p>
+{% else %}
+    <p>You are not using chrome.</p>
+{% endif %}
+
+{% endblock %}

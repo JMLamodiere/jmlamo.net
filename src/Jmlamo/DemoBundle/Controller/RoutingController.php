@@ -13,6 +13,23 @@ class RoutingController extends Controller
 {
 
     /**
+     * @Route("/routing/browser", condition="context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/chrome/i'")
+     */
+    public function chromeAction(Request $request)
+    {
+        return $this->render('JmlamoDemoBundle:Routing:browser.html.twig', array('chrome' => true));
+    }
+
+    /**
+     * @Route("/routing/browser")
+     * @Template()
+     */
+    public function browserAction(Request $request)
+    {
+        return array('chrome' => false);
+    }
+
+    /**
      * @Route("/routing/contact")
      * @Method("GET")
      * @Template()
@@ -36,7 +53,7 @@ class RoutingController extends Controller
         $session->set('routingNameValue', substr($request->request->get('name'), 0, 30));
         
         return $this->redirect($this->generateUrl('jmlamo_demo_routing_contact'));
-    }  
+    }
 
     /**
      * @Route("/routing/{page}", defaults={"page" = 1}, requirements={"page": "\d+"})
