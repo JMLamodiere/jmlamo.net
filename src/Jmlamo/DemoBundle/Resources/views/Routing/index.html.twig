@@ -1,0 +1,11 @@
+{% extends "::base.html.twig" %}
+{% block title %}JmlamoDemoBundle:Routing:index{% endblock %}
+{% block body %}
+<h1>Routing homepage</h1>
+<dl>
+    <dt>Page :</dt>
+    <dd>{{ page }}</dd>
+</dl>
+<p><a href="{{ path('jmlamo_demo_routing_show', {'slug': 'my-blog-post'}) }}">Relative link to &quot;my blog post&quot;</a></p>
+<p><a href="{{ url('jmlamo_demo_routing_show', {'slug': 'my-blog-post'}) }}">Absolute link to &quot;my blog post&quot;</a></p>
+{% endblock %}
