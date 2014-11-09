@@ -35,6 +35,8 @@ class HelloController extends Controller
      */
     public function manualrenderingAction(Request $request)
     {
+        //or $request = $this->get('request');
+    
         $content = $this->renderView('JmlamoDemoBundle:Hello:index.html.twig', array(
             'firstname' => 'Manual',
             'lastname' => $request->get('nameInQueryString', 'Anonymous'),
@@ -43,7 +45,15 @@ class HelloController extends Controller
         return new Response($content);
         
         //or return $this->render(...
-    }    
+    }
+    
+    /**
+     * @Route("/hello/god")
+     */
+    public function godAction()
+    {
+        throw $this->createNotFoundException('God does not exist (in this bundle...)');
+    } 
 
     /**
      * @Route("/hello/{firstname}/{lastname}")
