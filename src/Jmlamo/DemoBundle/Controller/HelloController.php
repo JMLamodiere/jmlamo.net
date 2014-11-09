@@ -18,6 +18,16 @@ class HelloController extends Controller
     {
         return new Response('<html><body>Hello world, sending new Response("html code")</body></html>');
     }
+    
+    /**
+     * @Route("/hello/wizard")
+     */
+    public function wizardAction(Request $request)
+    {
+        $response = $this->forward('JmlamoDemoBundle:Hello:index', array('firstname' => 'Harry', 'lastname' => 'Poster'));
+        
+        return $response;
+    }    
 
     /**
      * @Route("/hello/{firstname}/{lastname}")
