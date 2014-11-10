@@ -39,7 +39,8 @@ class DefaultControllerTest extends WebTestCase
         //godAction
         $client = static::createClient();
         $crawler = $client->request('GET', '/demo/hello/god');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        //$this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isNotFound());
         
         //indexAction
         $client = static::createClient();
