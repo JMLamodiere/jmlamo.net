@@ -14,9 +14,26 @@ class TwigController extends Controller
      */
     public function indexAction()
     {
-        return array(
-            // ...
-        );
+        return array();
     }
+    
+    /**
+     * @Route("/twig/for")
+     * @Template()
+     */
+    public function forAction()
+    {
+        $begin = new \DateTime('now');
+        //now + 4 days
+        $end = clone $begin;
+        $end->add(new \DateInterval('P4D'));
+        
+        //4 days coming, including today
+        $period = new \DatePeriod($begin, new \DateInterval('P1D'), $end);
+        
+        return array(
+            'period' => $period,
+        );
+    }    
 
 }

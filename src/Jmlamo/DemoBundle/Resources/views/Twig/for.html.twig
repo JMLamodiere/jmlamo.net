@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}JmlamoDemoBundle:Twig:for{% endblock %}
+
+{% block body %}
+<h1>For examples</h1>
+
+<h2>Even and odd iterations</h2>
+<ul>
+{% for i in 0..3 %}
+    <li>Iteration #{{ i }} is {{ cycle(['even', 'odd'], i) }}</li>
+{% endfor %}
+</ul>
+
+<h2>Is a weekend day coming soon ?</h2>
+<ul>
+{# 6=saterday, 7=sunday #}
+{% for day in period if day.format('N') >=6 %}
+    <li>{{ day.format('l d F Y') }} is a weekend day</li>
+{% else %}
+    <li>No, the week has just started</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
