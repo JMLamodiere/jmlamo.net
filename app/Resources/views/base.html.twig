@@ -2,12 +2,30 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Jmlamo.net, my personnal website{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="sidebar">
+            {% block sidebar %}
+                <ul>
+                    <li><a href="{{ path('jmlamo_demo_hello_index') }}">Hello</a></li>
+                    <li><a href="{{ path('jmlamo_demo_random_index') }}">Random</a></li>
+                    <li><a href="{{ path('jmlamo_demo_routing_index') }}">Routing</a></li>
+                    <li><a href="{{ path('jmlamo_demo_session_index') }}">Session</a></li>
+                    <li><a href="{{ path('jmlamo_demo_twig_index') }}">Twig</a></li>
+                </ul>
+            {% endblock %}
+        </div>
+        <div id="content">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash-message">
+                <em>Notice</em>: {{ flashMessage }}
+            </div>
+        {% endfor %}
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
