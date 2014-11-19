@@ -25,6 +25,10 @@ class TwigControllerTest extends WebTestCase
             $this->assertGreaterThan(0, $crawler->filter('li:contains("is a weekend day")')->count());
         }
         
+        //embedding
+        $crawler = $client->request('GET', '/demo/twig/embedding');
+        $this->assertCount(5, $crawler->filter('ul#lastDays li'));
+        
     }
 
 }

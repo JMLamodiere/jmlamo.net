@@ -34,6 +34,32 @@ class TwigController extends Controller
         return array(
             'period' => $period,
         );
+    }
+    
+    /**
+     * @Route("/twig/embedding")
+     * @Template()
+     */
+    public function embeddingAction()
+    {
+        return array();
+    }
+    
+    /**
+     * @Template()
+     */
+    public function lastDaysAction($max = 3)
+    {
+        $end = new \DateTime('now');
+        $begin = clone $end;
+        $begin->sub(new \DateInterval('P' . $max . 'D'));
+        
+        //4 days coming, including today
+        $period = new \DatePeriod($begin, new \DateInterval('P1D'), $end);
+        
+        return array(
+            'period' => $period,
+        );
     }    
 
 }

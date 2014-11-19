@@ -1,0 +1,5 @@
+<ul id="lastDays">
+{% for day in period %}
+    <li>{{ day.format('l d F Y') }}</li>
+{% endfor %}
+</ul>

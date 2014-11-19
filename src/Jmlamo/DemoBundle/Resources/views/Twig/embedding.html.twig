@@ -1,0 +1,12 @@
+{% extends 'JmlamoDemoBundle::base.html.twig' %}
+
+{% block title %}JmlamoDemoBundle:Twig:embedding{% endblock %}
+
+{% block body %}
+<h1>Embedding controller action from a view template</h1>
+<p>Let's render the lastDaysAction :</p>
+{{ render(controller(
+    'JmlamoDemoBundle:Twig:lastDays',
+    {'max' : 5}
+)) }}
+{% endblock %}
