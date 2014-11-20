@@ -4,9 +4,29 @@
 
 {% block body %}
 <h1>Asynchronous content using hinclude.js</h1>
-<p>Let's &quot;hinclude&quot; the lastDaysAction to display the 4 last days :</p>
+<p>Let's &quot;hinclude&quot; the lastDaysAction to display the 2 last days :</p>
+<h2>Using default loading template :</h2>
 {{ render_hinclude(controller(
     'JmlamoDemoBundle:Twig:lastDays',
-    {'max' : 4}
+    {'max' : 2}
 )) }}
+
+<h2>Using custom loading template :</h2>
+{{ render_hinclude(
+    controller(
+        'JmlamoDemoBundle:Twig:lastDays',
+        {'max' : 2}
+    ),
+    {'default': 'JmlamoDemoBundle:Twig:hincludeCustomLoading.html.twig'}
+) }}
+
+<h2>Using custom loading message :</h2>
+{{ render_hinclude(
+    controller(
+        'JmlamoDemoBundle:Twig:lastDays',
+        {'max' : 2}
+    ),
+    {'default': 'PLEASE WAIT !!'}
+) }}
+
 {% endblock %}
