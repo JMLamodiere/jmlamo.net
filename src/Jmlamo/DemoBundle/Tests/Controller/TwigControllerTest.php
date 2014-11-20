@@ -29,6 +29,12 @@ class TwigControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/demo/twig/embedding');
         $this->assertCount(5, $crawler->filter('ul#lastDays li'));
         
+        //hinclude
+        $crawler = $client->request('GET', '/demo/twig/hinclude');
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("Loading...")')->count());
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("... NoW lOaDiNg ...")')->count());
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("PLEASE WAIT !!")')->count());
+        
     }
 
 }
