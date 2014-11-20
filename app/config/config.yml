@@ -14,6 +14,7 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
+        hinclude_default_template: JmlamoDemoBundle::hincludeDefault.html.twig
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -33,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ JmlamoDemoBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

@@ -1,2 +1,16 @@
 {% extends '::base.html.twig' %}
 {% block title %}Demo section - Jmlamo.net{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% stylesheets 'bundles/jmlamodemo/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% javascripts '@JmlamoDemoBundle/Resources/public/js/*' %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% endblock %}

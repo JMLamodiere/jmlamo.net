@@ -1,0 +1,12 @@
+{% extends 'JmlamoDemoBundle::base.html.twig' %}
+
+{% block title %}JmlamoDemoBundle:Twig:hinclude{% endblock %}
+
+{% block body %}
+<h1>Asynchronous content using hinclude.js</h1>
+<p>Let's &quot;hinclude&quot; the lastDaysAction to display the 4 last days :</p>
+{{ render_hinclude(controller(
+    'JmlamoDemoBundle:Twig:lastDays',
+    {'max' : 4}
+)) }}
+{% endblock %}

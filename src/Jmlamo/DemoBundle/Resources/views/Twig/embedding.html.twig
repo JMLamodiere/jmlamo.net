@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1>Embedding controller action from a view template</h1>
-<p>Let's render the lastDaysAction :</p>
+<p>Let's render the lastDaysAction to display the 5 last days :</p>
 {{ render(controller(
     'JmlamoDemoBundle:Twig:lastDays',
     {'max' : 5}

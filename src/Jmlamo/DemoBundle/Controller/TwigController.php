@@ -46,6 +46,15 @@ class TwigController extends Controller
     }
     
     /**
+     * @Route("/twig/hinclude")
+     * @Template()
+     */
+    public function hincludeAction()
+    {
+        return array();
+    }    
+    
+    /**
      * @Template()
      */
     public function lastDaysAction($max = 3)
