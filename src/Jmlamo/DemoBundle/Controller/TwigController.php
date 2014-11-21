@@ -69,6 +69,15 @@ class TwigController extends Controller
         return array(
             'period' => $period,
         );
+    }
+
+    /**
+     * @Route("/twig/asset")
+     * @Template()
+     */
+    public function assetAction()
+    {
+        return array();
     }    
 
 }
