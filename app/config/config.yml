@@ -15,7 +15,8 @@ framework:
     templating:
         engines: ['twig']
         hinclude_default_template: JmlamoDemoBundle::hincludeDefault.html.twig
-        #assets_version: SomeVersionScheme
+        assets_version: "3"
+        assets_version_format: v%%2$s/%%1$s
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
