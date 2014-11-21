@@ -12,7 +12,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class HelloController extends Controller
 {
     /**
-     * url "/hello/world" matches worldAction AND indexAction, but the first one is called
+     * @Route("/hello")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        return array();
+    }
+
+    /**
+     * url "/hello/world" matches worldAction AND nmeAction, but the first one is called
      * @Route("/hello/world")
      */
     public function worldAction()
@@ -25,7 +34,7 @@ class HelloController extends Controller
      */
     public function wizardAction()
     {
-        $response = $this->forward('JmlamoDemoBundle:Hello:index', array('firstname' => 'Harry', 'lastname' => 'Poster'));
+        $response = $this->forward('JmlamoDemoBundle:Hello:name', array('firstname' => 'Harry', 'lastname' => 'Poster'));
         
         return $response;
     }
@@ -38,7 +47,7 @@ class HelloController extends Controller
     {
         //or $request = $this->get('request');
     
-        $content = $this->renderView('JmlamoDemoBundle:Hello:index.html.twig', array(
+        $content = $this->renderView('JmlamoDemoBundle:Hello:name.html.twig', array(
             'firstname' => 'Manual',
             'lastname' => $request->get('nameInQueryString', 'Anonymous'),
         ));
@@ -88,14 +97,9 @@ class HelloController extends Controller
      * @Route("/hello/{firstname}/{lastname}")
      * @Template()
      */
-    public function indexAction($firstname = null, $lastname = 'Doe')
+    public function nameAction($firstname, $lastname = 'Doe')
     {
-        //if no firstname, redirect 301 with au firstname
-        if (empty($firstname)) {
-            return $this->redirect($this->generateUrl('jmlamo_demo_hello_index', array('firstname' => 'John')), 302);
-        }
-    
-    
+
         return array(
             'firstname' => $firstname,
             'lastname' => $lastname,

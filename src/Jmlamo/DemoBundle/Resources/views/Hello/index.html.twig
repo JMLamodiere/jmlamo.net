@@ -1,5 +1,16 @@
 {% extends 'JmlamoDemoBundle::base.html.twig' %}
+
 {% block title %}JmlamoDemoBundle:Hello:index{% endblock %}
+
 {% block body %}
-<h1>Hello {{ firstname }} {{ lastname }}!</h1>
+<h1>Hello homepage</h1>
+<ul>
+    <li><a href="{{ path('jmlamo_demo_hello_name', {firstname: 'John'}) }}">Hello John Doe</a></li>
+    <li><a href="{{ path('jmlamo_demo_hello_world') }}">Manual html code</a></li>
+    <li><a href="{{ path('jmlamo_demo_hello_wizard') }}">Forward wizardAction to helloAction (no header redirection)</a></li>
+    <li><a href="{{ path('jmlamo_demo_hello_manualrendering', {'nameInQueryString': 'Pedro'}) }}">Rendring the template of another action</a></li>
+    <li><a href="{{ path('jmlamo_demo_hello_jsonredir') }}">302 header redirection</a></li>
+    <li><a href="{{ path('jmlamo_demo_hello_json', {'name': 'Julius'}) }}">JSON data</a></li>
+    <li><a href="{{ path('jmlamo_demo_hello_god') }}">404 error</a></li>
+</ul>
 {% endblock %}
