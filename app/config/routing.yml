@@ -1,3 +1,7 @@
+jmlamo_app:
+    resource: "@JmlamoAppBundle/Resources/config/routing.yml"
+    prefix:   /
+
 jmlamo_demo:
     resource: "@JmlamoDemoBundle/Resources/config/routing.yml"
     prefix:   /demo

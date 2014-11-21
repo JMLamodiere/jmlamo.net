@@ -1,0 +1,3 @@
+jmlamo_app:
+    resource: "@JmlamoAppBundle/Controller/"
+    type:     annotation
