@@ -1,5 +1,5 @@
 jmlamo_app:
-    resource: "@JmlamoAppBundle/Resources/config/routing.yml"
+    resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
 
 jmlamo_demo:

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html{% block xmlns %} xmlns:hx="http://purl.org/NET/hinclude"{% endblock %}>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Jmlamo.net, my personnal website{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -10,7 +11,7 @@
         <div id="sidebar">
             {% block sidebar %}
                 <ul>
-                    <li><a href="{{ path('jmlamo_app_default_index') }}">Home</a></li>
+                    <li><a href="{{ path('app_default_index') }}">Home</a></li>
                     <li><a href="{{ path('jmlamo_demo_default_index') }}">Symfony2 Demo bundle</a></li>
                 </ul>
             {% endblock %}

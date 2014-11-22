@@ -1,6 +1,6 @@
 <?php
 
-namespace Jmlamo\AppBundle\Tests\Controller;
+namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -11,7 +11,6 @@ class DefaultControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/');
-
         $this->assertTrue($crawler->filter('html:contains("Welcome")')->count() > 0);
     }
 }
