@@ -4,7 +4,7 @@ namespace Jmlamo\DemoBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class IndexControllerTest extends WebTestCase
+class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()
     {
