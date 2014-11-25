@@ -6,5 +6,9 @@
 <h1>Doctrine homepage</h1>
 <ul>
     <li><a href="{{ path('jmlamo_demo_doctrine_create') }}">Create random product</a></li>
+    <li><a href="{{ path('jmlamo_demo_doctrine_show', {id: 9}) }}">Product 9</a></li>
+    <li><a href="{{ path('jmlamo_demo_doctrine_show', {id: 0}) }}">404 for product 0</a></li>
+    <li><a href="{{ path('jmlamo_demo_doctrine_autoshow', {id: 9}) }}">Product 9 using @ParamConverter</a></li>
+    <li><a href="{{ path('jmlamo_demo_doctrine_autoshow', {id: 0}) }}">404 for product 0 using @ParamConverter</a></li>
 </ul>
 {% endblock %}
