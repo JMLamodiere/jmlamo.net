@@ -28,7 +28,7 @@ class DoctrineController extends Controller
         $product = new Product();
         $product->setName('product ' . rand(1000, 9999));
         $product->setPrice(rand(0, 999999) / 100);
-        $product->setDescription(str_repeat('lorem ipsum ', rand(10, 50)));
+        $product->setDescription('lorem ipsum');
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($product);
@@ -86,5 +86,25 @@ class DoctrineController extends Controller
         //Forwarding to autoshowAction, passing the product as parameter
         return $this->forward('JmlamoDemoBundle:Doctrine:autoshow', array('product' => $product));
     }
+    
+    /**
+     * @Route("/doctrine/find-by-ordered/")
+     * @Template()
+     */
+    public function findByOrderedAction()
+    {
+        $repository = $this->get('doctrine')
+            ->getRepository('JmlamoDemoBundle:Product');
+        
+        $products = $repository->findBy(
+            //where conditions
+            array('description' => 'lorem ipsum'),
+            
+            //order by
+            array('price' => 'ASC')
+        );
+        
+        return array('products' => $products);
+    }    
 
 }
