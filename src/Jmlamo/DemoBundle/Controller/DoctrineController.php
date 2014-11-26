@@ -24,7 +24,7 @@ class DoctrineController extends Controller
      */
     public function createAction()
     {
-    
+        //creating new product with random values
         $product = new Product();
         $product->setName('product ' . rand(1000, 9999));
         $product->setPrice(rand(0, 999999) / 100);
@@ -49,7 +49,8 @@ class DoctrineController extends Controller
         $product = $this->getDoctrine()
             ->getRepository('JmlamoDemoBundle:Product')
             ->find($id);
-            
+        
+        //manual 404 error if no product found
         if (!$product) {
             throw $this->createNotFoundException(
                 'No product found for id '.$id
@@ -63,7 +64,27 @@ class DoctrineController extends Controller
      */
     public function autoshowAction(Product $product)
     {
+        //If no product found, 404 error is automatic
         return $this->render('JmlamoDemoBundle:Doctrine:show.html.twig',  array('product' => $product));
+    }
+    
+    /**
+     * @Route("/doctrine/find-one-by-name/{name}.html")
+     */
+    public function findOneByNameAction($name)
+    {
+        $repository = $this->get('doctrine')
+            ->getRepository('JmlamoDemoBundle:Product');
+        
+        $product = $repository->findOneByName($name);
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for this name '
+            );
+        }
+        
+        //Forwarding to autoshowAction, passing the product as parameter
+        return $this->forward('JmlamoDemoBundle:Doctrine:autoshow', array('product' => $product));
     }
 
 }
