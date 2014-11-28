@@ -1,7 +1,8 @@
 {% extends 'JmlamoDemoBundle::base.html.twig' %}
-{% block title %}{{ products|length }} products{% endblock %}
+{% block title %}Randomly created products{% endblock %}
 {% block body %}
-    <h1>{{ products|length }} products found</h1>
+    <h1>{{ products|length }} randomly created products found</h1>
+    <p><a href="{{ path('jmlamo_demo_doctrine_create') }}">Create random product</a></p>
     <table>
         <thead>
             <tr>
@@ -17,7 +18,10 @@
                 <th scope="row">{{ product.id }}</th>
                 <td><a href="{{ path('jmlamo_demo_doctrine_show', {id: product.id}) }}">{{ product.name }}</a></td>
                 <td>{{ product.price }}</td>
-                <td><a href="{{ path('jmlamo_demo_doctrine_update', {id: product.id}) }}">Update name</a></td>
+                <td>
+                    <a href="{{ path('jmlamo_demo_doctrine_update', {id: product.id}) }}">Update name</a>
+                    <a href="{{ path('jmlamo_demo_doctrine_delete', {id: product.id}) }}">Delete</a>
+                </td>
             </tr>
         {% else %}
             <tr>

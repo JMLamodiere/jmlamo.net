@@ -37,7 +37,7 @@ class DoctrineController extends Controller
         $session = $this->get('session');
         $session->getFlashBag()->add('notice', 'Product created : ' . $product->getName());
         
-        return $this->redirect($this->generateUrl('jmlamo_demo_doctrine_index'));
+        return $this->redirect($this->generateUrl('jmlamo_demo_doctrine_findbyordered'));
     }
     
     /**
@@ -51,6 +51,21 @@ class DoctrineController extends Controller
         
         $session = $this->get('session');
         $session->getFlashBag()->add('notice', 'Product edited : ' . $product->getName());
+        
+        return $this->redirect($this->generateUrl('jmlamo_demo_doctrine_findbyordered'));
+    }
+    
+    /**
+     * @Route("/doctrine/delete/{id}")
+     */
+    public function deleteAction(Product $product)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+        
+        $session = $this->get('session');
+        $session->getFlashBag()->add('notice', 'Product deleted');
         
         return $this->redirect($this->generateUrl('jmlamo_demo_doctrine_findbyordered'));
     }
