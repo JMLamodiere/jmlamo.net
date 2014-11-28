@@ -135,6 +135,27 @@ class DoctrineController extends Controller
         );
         
         return array('products' => $products);
-    }    
+    }
+    
+    /**
+     * @Route("/doctrine/query-builder/{max}", defaults={"max":50}, requirements={"max": "\d+"})
+     * @Template()
+     */
+    public function queryBuilderAction($max)
+    {
+        //find cheap products
+        $repository = $this->getDoctrine()->getRepository('JmlamoDemoBundle:Product');
+        
+        //the $qb is optionnal, we can directly getQuery() in one pass
+        $qb = $repository->createQueryBuilder('p')
+            ->where('p.price <= :price')
+            ->setParameter('price', $max);
+        $qb->orderBy('p.price', 'ASC');
+        $query = $qb->getQuery();
+        
+        $products = $query->getResult();
+        
+        return array('products' => $products, 'max' => $max);
+    }
 
 }

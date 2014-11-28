@@ -1,15 +1,13 @@
 {% extends 'JmlamoDemoBundle::base.html.twig' %}
-{% block title %}FindBy with orderBy{% endblock %}
+{% block title %}createQueryBuilder{% endblock %}
 {% block body %}
-    <h1>{{ products|length }} randomly created products found</h1>
-    <p><a href="{{ path('jmlamo_demo_doctrine_create') }}">Create random product</a></p>
+    <h1>{{ products|length }} products under {{ max }} $</h1>
     <table>
         <thead>
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,14 +16,10 @@
                 <th scope="row">{{ product.id }}</th>
                 <td><a href="{{ path('jmlamo_demo_doctrine_show', {id: product.id}) }}">{{ product.name }}</a></td>
                 <td>{{ product.price }}</td>
-                <td>
-                    <a href="{{ path('jmlamo_demo_doctrine_update', {id: product.id}) }}">Update name</a>
-                    <a href="{{ path('jmlamo_demo_doctrine_delete', {id: product.id}) }}">Delete</a>
-                </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">No product found matching your request.</td>
+                <td colspan="3">No product found matching your request.</td>
             </tr>
         {% endfor %}
         </tbody>
