@@ -143,19 +143,57 @@ class DoctrineController extends Controller
      */
     public function queryBuilderAction($max)
     {
-        //find cheap products
         $repository = $this->getDoctrine()->getRepository('JmlamoDemoBundle:Product');
         
         //the $qb is optionnal, we can directly getQuery() in one pass
         $qb = $repository->createQueryBuilder('p')
-            ->where('p.price <= :price')
-            ->setParameter('price', $max);
+            ->where('p.price <= :max')
+            ->setParameter('max', $max);
         $qb->orderBy('p.price', 'ASC');
         $query = $qb->getQuery();
         
         $products = $query->getResult();
         
         return array('products' => $products, 'max' => $max);
+    }
+    
+    /**
+     * @Route("/doctrine/dql/{max}", defaults={"max":50}, requirements={"max": "\d+"})
+     * @Template()
+     */
+    public function dqlAction($max)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $query = $em->createQuery(
+            'SELECT p
+            FROM JmlamoDemoBundle:Product p
+            WHERE p.price <= :max
+            ORDER BY p.price ASC'
+        )->setParameter('max', $max);
+        
+        $products = $query->getResult();
+        
+        return $this->forward('JmlamoDemoBundle:Doctrine:queryBuilder', array('products' => $products, 'max' => $max));
+    }    
+    
+    /**
+     * @Route("/doctrine/one-or-null/")
+     * @Template()
+     */
+    public function oneOrNullAction()
+    {
+        $repository = $this->getDoctrine()->getRepository('JmlamoDemoBundle:Product');
+    
+        $query = $repository->createQueryBuilder('p')
+            ->where('p.name = :name')
+            ->setParameter('name', 'Gluten-free apple')
+            ->getQuery();
+        
+        $product = $query->getOneOrNullResult();
+        
+        //Forwarding to autoshowAction, passing the product as parameter
+        return $this->forward('JmlamoDemoBundle:Doctrine:autoshow', array('product' => $product));
     }
 
 }
