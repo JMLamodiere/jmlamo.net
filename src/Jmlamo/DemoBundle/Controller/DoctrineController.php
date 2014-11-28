@@ -41,6 +41,21 @@ class DoctrineController extends Controller
     }
     
     /**
+     * @Route("/doctrine/update/{id}")
+     */
+    public function updateAction(Product $product)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $product->setName('Edited name, ' . date('H:i:s'));
+        $em->flush();
+        
+        $session = $this->get('session');
+        $session->getFlashBag()->add('notice', 'Product edited : ' . $product->getName());
+        
+        return $this->redirect($this->generateUrl('jmlamo_demo_doctrine_findbyordered'));
+    }
+    
+    /**
      * @Route("/doctrine/show/{id}.html")
      * @Template()
      */

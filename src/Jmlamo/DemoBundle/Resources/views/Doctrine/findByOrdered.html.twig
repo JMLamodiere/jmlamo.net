@@ -8,6 +8,7 @@
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,10 +17,11 @@
                 <th scope="row">{{ product.id }}</th>
                 <td><a href="{{ path('jmlamo_demo_doctrine_show', {id: product.id}) }}">{{ product.name }}</a></td>
                 <td>{{ product.price }}</td>
+                <td><a href="{{ path('jmlamo_demo_doctrine_update', {id: product.id}) }}">Update name</a></td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">No product found matching your request.</td>
+                <td colspan="4">No product found matching your request.</td>
             </tr>
         {% endfor %}
         </tbody>
