@@ -1,14 +1,21 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "jmlamodiere/jmlamo.net",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "jmlamo.net : my personnal demo website",
+    "homepage": "http://github.com/JMLamodiere/jmlamo.net",
+    "authors": [
+        {
+            "name": "Jean-Marie Lamodière",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.5.*",
+        "symfony/symfony": "2.6.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "doctrine/migrations": "1.0.*@dev",
@@ -60,7 +67,7 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "2.5-dev"
+            "dev-master": "2.6-dev"
         }
     }
 }
