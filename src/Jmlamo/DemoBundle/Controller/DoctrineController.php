@@ -158,7 +158,7 @@ class DoctrineController extends Controller
     }
     
     /**
-     * @Route("/doctrine/dql/{max}", defaults={"max":50}, requirements={"max": "\d+"})
+     * @Route("/doctrine/dql/{max}", requirements={"max": "\d+"})
      * @Template()
      */
     public function dqlAction($max)
@@ -175,7 +175,20 @@ class DoctrineController extends Controller
         $products = $query->getResult();
         
         return $this->forward('JmlamoDemoBundle:Doctrine:queryBuilder', array('products' => $products, 'max' => $max));
-    }    
+    }
+    
+    /**
+     * @Route("/doctrine/repository/{max}", requirements={"max": "\d+"})
+     * @Template()
+     */
+    public function repositoryAction($max)
+    {
+        $repository = $this->getDoctrine()->getRepository('JmlamoDemoBundle:Product');
+        
+        $products = $repository->findAllByMaxParice($max);
+        
+        return $this->forward('JmlamoDemoBundle:Doctrine:queryBuilder', array('products' => $products, 'max' => $max));
+    }
     
     /**
      * @Route("/doctrine/one-or-null/")
