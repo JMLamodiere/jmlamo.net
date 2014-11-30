@@ -29,4 +29,25 @@ class ProductRepository extends EntityRepository
             ->setParameter('maxPrice', $maxPrice)
             ->getResult();
     }
+    
+    /**
+     * @param integer $id
+     * @return Product|null
+     */
+    public function findOneByIdJoinedToCategory($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery(
+                'SELECT p, c
+                FROM JmlamoDemoBundle:Product p
+                LEFT JOIN p.category c
+                WHERE p.id = :id'
+            )->setParameter('id', $id);
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

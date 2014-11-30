@@ -2,6 +2,10 @@
 {% block title %}{{ product.name }}{% endblock %}
 {% block body %}
     <h1>{{ product.name }}</h1>
+{% if product.category %}
+    <p>Category : {{ product.category.name }}</p>
+{% endif %}
+    <p>{{ product.description|nl2br }}</p>
     <p>{{ product.price|number_format(2, ',', ' ') }} €</p>
     <p>{{ product.description|nl2br }}</p>
 {% endblock %}

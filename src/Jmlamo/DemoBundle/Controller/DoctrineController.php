@@ -124,6 +124,24 @@ class DoctrineController extends Controller
     }
     
     /**
+     * @Route("/doctrine/find-join/{id}.html")
+     */
+    public function findJoinAction($id)
+    {
+        $repository = $this->getDoctrine()
+            ->getRepository('JmlamoDemoBundle:Product');
+        
+        if (!$product = $repository->findOneByIdJoinedToCategory($id)) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $id
+            );
+        }
+        
+        //Forwarding to autoshowAction, passing the product as parameter
+        return $this->forward('JmlamoDemoBundle:Doctrine:autoshow', array('product' => $product));
+    }
+    
+    /**
      * @Route("/doctrine/find-by-ordered/")
      * @Template()
      */
