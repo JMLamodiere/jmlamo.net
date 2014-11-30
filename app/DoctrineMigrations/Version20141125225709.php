@@ -47,6 +47,10 @@ class Version20141125225709 extends AbstractMigration implements ContainerAwareI
         $product->setDescription('First product, added by migraton 20141125225709');
         
         $em->persist($product);
-        $em->flush();
+        
+        //Error : SQLSTATE[42S22]: Column not found: 1054 Unknown column 'category_id' in 'field list'
+        //The php Product class has a new column "category_id" wich didn't existed at the time of this migration
+        //@TODO : find a way to handle this problem
+        //$em->flush();
     }
 }
