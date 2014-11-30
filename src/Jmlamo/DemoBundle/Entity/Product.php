@@ -42,6 +42,12 @@ class Product
      */
     private $description;
 
+    /**
+     * @var \Jmlamo\DemoBundle\Entity\Category
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
 
     /**
      * Get id
@@ -120,5 +126,28 @@ class Product
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Jmlamo\DemoBundle\Entity\Category $category
+     * @return Product
+     */
+    public function setCategory(\Jmlamo\DemoBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Jmlamo\DemoBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
