@@ -169,7 +169,6 @@ class DoctrineController extends Controller
     
     /**
      * @Route("/doctrine/dql/{max}", requirements={"max": "\d+"})
-     * @Template()
      */
     public function dqlAction($max)
     {
@@ -184,7 +183,7 @@ class DoctrineController extends Controller
         
         $products = $query->getResult();
         
-        return $this->forward('JmlamoDemoBundle:Doctrine:queryBuilder', array('products' => $products, 'max' => $max));
+        return $this->render('JmlamoDemoBundle:Doctrine:queryBuilder.html.twig', array('products' => $products, 'max' => $max));
     }
     
     /**
@@ -197,7 +196,7 @@ class DoctrineController extends Controller
         
         $products = $repository->findAllByMaxParice($max);
         
-        return $this->forward('JmlamoDemoBundle:Doctrine:queryBuilder', array('products' => $products, 'max' => $max));
+        return $this->render('JmlamoDemoBundle:Doctrine:queryBuilder.html.twig', array('products' => $products, 'max' => $max));
     }
     
     /**
