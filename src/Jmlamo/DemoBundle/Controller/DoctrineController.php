@@ -24,13 +24,19 @@ class DoctrineController extends Controller
      */
     public function createAction()
     {
+        $em = $this->getDoctrine()->getManager();
+    
+        //all this products belongs to 'Random products' category
+        $category = $em->getRepository('JmlamoDemoBundle:Category')
+            ->find(1);
+    
         //creating new product with random values
         $product = new Product();
         $product->setName('product ' . rand(1000, 9999));
         $product->setPrice(rand(0, 999999) / 100);
         $product->setDescription('lorem ipsum');
+        $product->setCategory($category);
 
-        $em = $this->getDoctrine()->getManager();
         $em->persist($product);
         $em->flush();
         
@@ -123,12 +129,16 @@ class DoctrineController extends Controller
      */
     public function findByOrderedAction()
     {
+        $category = $this->getDoctrine()
+            ->getRepository('JmlamoDemoBundle:Category')
+            ->find(1);
+    
         $repository = $this->get('doctrine')
             ->getRepository('JmlamoDemoBundle:Product');
         
         $products = $repository->findBy(
             //where conditions
-            array('description' => 'lorem ipsum'),
+            array('category' => $category),
             
             //order by
             array('price' => 'ASC')
