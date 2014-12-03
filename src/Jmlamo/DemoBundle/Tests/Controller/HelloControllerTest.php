@@ -21,11 +21,11 @@ class HelloControllerTest extends WebTestCase
         
         //wizardAction
         $crawler = $client->request('GET', '/demo/hello/wizard');
-        $this->assertTrue($crawler->filter('html:contains("Hello Harry Poster")')->count() == 1);
+        $this->assertCount(1, $crawler->filter('html:contains("Hello Harry Poster")'));
         
         //manualrenderingAction
         $crawler = $client->request('GET', '/demo/hello/manual-rendering?nameInQueryString=Sanchez');
-        $this->assertTrue($crawler->filter('html:contains("Hello Manual Sanchez")')->count() == 1);        
+        $this->assertCount(1, $crawler->filter('html:contains("Hello Manual Sanchez")'));        
         
         //jsonredirAction
         $crawler = $client->request('GET', '/demo/hello/json');

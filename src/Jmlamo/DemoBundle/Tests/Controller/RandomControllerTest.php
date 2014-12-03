@@ -11,7 +11,7 @@ class RandomControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/demo/random/2');
-        $this->assertTrue($crawler->filter('html:contains("Limit given : 2")')->count() == 1);
+        $this->assertCount(1, $crawler->filter('html:contains("Limit given : 2")'));
         $this->assertRegExp('/Result : [1-2]/', $client->getResponse()->getContent());
     }
 

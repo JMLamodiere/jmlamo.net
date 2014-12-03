@@ -11,7 +11,7 @@ class RoutingControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/demo/routing');
-        $this->assertTrue($crawler->filter('html:contains("Routing homepage")')->count() == 1);
+        $this->assertCount(1, $crawler->filter('html:contains("Routing homepage")'));
         
         $link = $crawler->filter('a:contains("Page 2")')->eq(0)->link();
         $crawler = $client->click($link);
@@ -31,7 +31,7 @@ class RoutingControllerTest extends WebTestCase
         $absoluteLinkNode = $crawler->filter('a:contains("Absolute link")')->first();
         $href = $absoluteLinkNode->attr('href');
         //absolute url starts with "http(s)://"
-        $this->assertEquals('http', substr($href, 0, 4));
+        $this->assertStringStartsWith('http', $href);
         
         //relative and absolute link lead to the same page
         //@see Symfony\Component\DomCrawler\Link
