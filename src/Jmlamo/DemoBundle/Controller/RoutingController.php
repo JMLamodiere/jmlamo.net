@@ -66,13 +66,14 @@ class RoutingController extends Controller
     
         switch ($_format) {
             case 'html' :
-                return $this->render('JmlamoDemoBundle:Routing:year.html.twig', $data);
+                $response = $this->render('JmlamoDemoBundle:Routing:year.html.twig', $data);
                 break;
                 
             case 'json' :
-                return new JsonResponse($data, Response::HTTP_OK);
+                $response = new JsonResponse($data, Response::HTTP_OK);
                 break;
         }
+        return $response;
     }    
 
     /**

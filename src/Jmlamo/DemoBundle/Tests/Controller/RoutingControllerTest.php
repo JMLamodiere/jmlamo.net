@@ -55,7 +55,8 @@ class RoutingControllerTest extends WebTestCase
         unset($chromeClient);
         
         $crawler = $client->request('GET', '/demo/routing/contact');
-        $this->assertTrue($crawler->filter('h1:contains("GET method")')->count() == 1);
+        $node = $crawler->filter('dl:contains("Last name received") > dd');
+        $this->assertEquals($node->text(), 'none');
         //@see Symfony\Component\DomCrawler\Form
         $form = $crawler->selectButton('OK')->form();
         $this->assertEquals('POST', $form->getMethod());
@@ -73,5 +74,27 @@ class RoutingControllerTest extends WebTestCase
         $node = $crawler->filter('dl:contains("Last name received") > dd');
         $this->assertEquals($node->text(), 'Théo');
         $this->assertTrue($crawler->filter('.flash-message:contains("Form data received")')->count() == 1);
+        
+        //link to html format
+        $crawler = $client->request('GET', '/demo/routing');
+        $link = $crawler->filter('a:contains("html format")')->first()->link();
+        $uri = $link->getUri();
+        $this->assertEquals('routing/year', substr($uri, strlen($uri) - 12));
+        
+        $crawler = $client->click($link);
+        $this->assertTrue($crawler->filter('dd:contains("' . date('Y') . '")')->count() == 1);
+        
+        //link to json format
+        $crawler = $client->back();
+        $link = $crawler->filter('a:contains("json format")')->first()->link();
+        $uri = $link->getUri();
+        $this->assertEquals('routing/year.json', substr($uri, strlen($uri) - 17));
+        
+        $client->click($link);
+        $this->assertTrue($client->getResponse()->headers->contains(
+            'Content-Type',
+            'application/json'
+        ));
+        $this->assertEquals('{"year":"' . date('Y') . '"}', $client->getResponse()->getContent());
     }
 }

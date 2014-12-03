@@ -35,6 +35,12 @@ class TwigControllerTest extends WebTestCase
         $this->assertGreaterThan(0, $crawler->filter('html:contains("... NoW lOaDiNg ...")')->count());
         $this->assertGreaterThan(0, $crawler->filter('html:contains("PLEASE WAIT !!")')->count());
         
+        //assets
+        $crawler = $client->request('GET', '/demo/twig/asset');
+        $node = $crawler->filter('h2:contains("Relative")')
+            ->nextAll()
+            ->filter('img')->first();
+        $this->assertEquals('/v3/bundles/jmlamodemo/images/beach_400.jpg', $node->attr('src'));
     }
 
 }
