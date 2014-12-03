@@ -52,7 +52,7 @@ class TwigControllerTest extends WebTestCase
             '#^\/v(\d+)\/#',
             $src
         );
-        $this->assertEquals($srcEnd, substr($src, strlen($src) - strlen($srcEnd)));
+        $this->assertStringEndsWith($srcEnd, $src);
         
         //<img> next to "<h2>Absolute..."
         $src = $crawler->filter('h2:contains("Absolute")')
@@ -61,11 +61,8 @@ class TwigControllerTest extends WebTestCase
             ->first()
             ->attr('src');
         //must start with http://
-        $this->assertRegExp(
-            '#^(http|https):\/\/#',
-            $src
-        );
-        $this->assertEquals($srcEnd, substr($src, strlen($src) - strlen($srcEnd)));
+        $this->assertStringStartsWith('http', $src);
+        $this->assertStringEndsWith($srcEnd, $src);
         
         //<img> next to "<h2>Individual asset..."
         $src = $crawler->filter('h2:contains("Individual asset")')
