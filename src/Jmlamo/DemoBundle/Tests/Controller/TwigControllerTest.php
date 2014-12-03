@@ -36,11 +36,44 @@ class TwigControllerTest extends WebTestCase
         $this->assertGreaterThan(0, $crawler->filter('html:contains("PLEASE WAIT !!")')->count());
         
         //assets
+        
+        //all images must end with this :
+        $srcEnd = 'bundles/jmlamodemo/images/beach_400.jpg';
+        
         $crawler = $client->request('GET', '/demo/twig/asset');
-        $node = $crawler->filter('h2:contains("Relative")')
+        //<img> next to "<h2>Relative..."
+        $src = $crawler->filter('h2:contains("Relative")')
             ->nextAll()
-            ->filter('img')->first();
-        $this->assertEquals('/v3/bundles/jmlamodemo/images/beach_400.jpg', $node->attr('src'));
+            ->filter('img')
+            ->first()
+            ->attr('src');
+        //must start with /v3/...
+        $this->assertRegExp(
+            '#^\/v(\d+)\/#',
+            $src
+        );
+        $this->assertEquals($srcEnd, substr($src, strlen($src) - strlen($srcEnd)));
+        
+        //<img> next to "<h2>Absolute..."
+        $src = $crawler->filter('h2:contains("Absolute")')
+            ->nextAll()
+            ->filter('img')
+            ->first()
+            ->attr('src');
+        //must start with http://
+        $this->assertRegExp(
+            '#^(http|https):\/\/#',
+            $src
+        );
+        $this->assertEquals($srcEnd, substr($src, strlen($src) - strlen($srcEnd)));
+        
+        //<img> next to "<h2>Individual asset..."
+        $src = $crawler->filter('h2:contains("Individual asset")')
+            ->nextAll()
+            ->filter('img')
+            ->first()
+            ->attr('src');
+        $this->assertEquals('/v2/' . $srcEnd, $src);
     }
 
 }
