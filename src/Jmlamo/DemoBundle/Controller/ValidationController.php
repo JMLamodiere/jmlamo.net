@@ -30,11 +30,7 @@ class ValidationController extends Controller
         $session = $request->getSession();
         
         $author = new Author();
-        
-        //for security reasons, we only allow "Jude"
-        if ('Jude' == $name) {
-            $author->setName($name);
-        }
+        $author->setName($name);
         
         $errors = $validator->validate($author);
         
