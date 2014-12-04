@@ -4,7 +4,8 @@
 
 {% block body %}
 <h1>Validation homepage</h1>
-{# <ul>
-    <li><a href="{{ path('jmlamo_demo_validation_x') }}">(Todo)</a></li>
-</ul> #}
+<ul>
+    <li><a href="{{ path('jmlamo_demo_validation_create') }}">Create author with blank name (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_create', {name: "Jude"}) }}">Create author with a name (ok !)</a></li>
+</ul>
 {% endblock %}
