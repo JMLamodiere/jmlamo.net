@@ -29,6 +29,17 @@ class Author
      * @Assert\NotBlank()
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", length=20, nullable=true)
+     * @Assert\Choice(
+     *     choices = { "male", "female" },
+     *     message = "Choose a valid gender."
+     * )
+     */
+    private $gender;
 
 
     /**
@@ -62,5 +73,28 @@ class Author
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     * @return Author
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string 
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }

@@ -22,9 +22,9 @@ class ValidationController extends Controller
     }
     
     /**
-     * @Route("/validation/create/{name}")
+     * @Route("/validation/set-name/{name}")
      */
-    public function createAction(Request $request, $name = null)
+    public function setNameAction(Request $request, $name = null)
     {
         $validator = $this->get('validator');
         $session = $request->getSession();
@@ -50,5 +50,45 @@ class ValidationController extends Controller
         
         return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
     }
+    
+    /**
+     * @Route("/validation/set-gender/{gender}")
+     */
+    public function setGenderAction(Request $request, $gender = null)
+    {
+        $validator = $this->get('validator');
+        $session = $request->getSession();
+        
+        $author = new Author();
+        $author->setName('Gomez');
+        
+        $author->setGender($gender);
+        
+        $errors = $validator->validate($author);
+        
+        if (count($errors) > 0) {
+            $session->getFlashBag()->add(
+                'notice',
+                // @see __toString()
+                (string) $errors
+            );
+            
+        } else {
+            $gender = $author->getGender();
+            if (strlen($gender) > 0) {
+                $session->getFlashBag()->add(
+                    'notice',
+                    sprintf('%s is valid !', $gender)
+                );
+            } else {
+                $session->getFlashBag()->add(
+                    'notice',
+                    'Ok, gender is not required !'
+                );
+            }
+        }
+        
+        return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
+    }    
 
 }
