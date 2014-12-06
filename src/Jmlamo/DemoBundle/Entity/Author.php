@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="author")
  * @ORM\Entity
+ * @Assert\GroupSequence({"Author", "Strict"})
  */
 class Author
 {
@@ -26,8 +27,8 @@ class Author
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
-     * @Assert\NotBlank()
-     * @Assert\Length(min = "2")
+     * @Assert\NotBlank(groups={"Default", "registration"})
+     * @Assert\Length(min = "2", groups={"Default", "registration"})
      */
     private $name;
     
@@ -37,7 +38,8 @@ class Author
      * @ORM\Column(name="gender", type="string", length=20, nullable=true)
      * @Assert\Choice(
      *     choices = { "male", "female" },
-     *     message = "Choose a valid gender."
+     *     message = "Choose a valid gender.",
+     *     groups={"Strict"}
      * )
      */
     private $gender;
@@ -46,6 +48,7 @@ class Author
      * @var string
      *
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(groups={"registration"})
      */
     private $password;    
 
@@ -130,7 +133,7 @@ class Author
     }
     
     /**
-     * @Assert\True(message = "The password cannot match your name")
+     * @Assert\True(message = "The password cannot match your name", groups={"Default", "registration"})
      */
     public function isPasswordLegal()
     {

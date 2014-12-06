@@ -50,6 +50,12 @@ class ValidationControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertCount(1, $crawler->filter('.flash-message:contains("is valid !")'));
         
+        //blank password -> ok
+        $crawler = $client->request('GET', '/demo/validation/set-password');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("password is not required")'));
+        
         //illegal password
         $crawler = $client->request('GET', '/demo/validation/set-password/Jude');
         $this->assertTrue($client->getResponse()->isRedirect());
@@ -60,7 +66,39 @@ class ValidationControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/demo/validation/set-password/azerty');
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $crawler->filter('.flash-message:contains("is legal")'));        
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("is legal")'));
+        
+        //blank password during registration -> fails
+        $crawler = $client->request('GET', '/demo/validation/set-registration-password');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("should not be blank")'));
+        
+        //illegal password during registration
+        $crawler = $client->request('GET', '/demo/validation/set-registration-password/Jude');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("cannot match your name")'));
+        
+        //legal password during registration
+        $crawler = $client->request('GET', '/demo/validation/set-registration-password/azerty');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("is legal")'));
+        
+        //Invalid name and gender
+        $crawler = $client->request('GET', '/demo/validation/set-name-and-gender/D/Adams');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("value is too short")'));
+        $this->assertCount(0, $crawler->filter('.flash-message:contains("Choose a valid gender")'));
+        
+        //Valid name but invalid gender
+        $crawler = $client->request('GET', '/demo/validation/set-name-and-gender/Jude/Adams');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(0, $crawler->filter('.flash-message:contains("value is too short")'));
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("Choose a valid gender")'));
     }
 
 }

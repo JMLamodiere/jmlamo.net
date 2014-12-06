@@ -5,13 +5,19 @@
 {% block body %}
 <h1>Validation homepage</h1>
 <ul>
-    <li><a href="{{ path('jmlamo_demo_validation_setname') }}">Create author with blank name (fails !)</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_setname', {name: "D"}) }}">Create author with a name too short (fails !)</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_setname', {name: "Jude"}) }}">Create author with a name (ok !)</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_setgender') }}">Create author without gender (ok !)</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "Adams"}) }}">Create author with a weird gender (fails !)</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "male"}) }}">Create author with a valid gender (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setname') }}">Blank name (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setname', {name: "D"}) }}">Name too short (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setname', {name: "Jude"}) }}">Valid name (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setgender') }}">Blank gender (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "Adams"}) }}">Gender not maching choices (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "male"}) }}">Valid gender (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setpassword') }}">Blank Password (ok !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setpassword', {password: "Jude"}) }}">Illegal Password : same as name</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setpassword', {password: "azerty"}) }}">Legal password</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setregistrationpassword') }}">Blank Password during registration (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setregistrationpassword', {password: "Jude"}) }}">Illegal password during registration</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setregistrationpassword', {password: "azerty"}) }}">Legal password during registration</a></li>    
+    <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "D", gender: "Adams"}) }}">Invalid name and gender. First notice.</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "Jude", gender: "Adams"}) }}">Valid name but invalid gender. Second notice.</a></li>
 </ul>
 {% endblock %}
