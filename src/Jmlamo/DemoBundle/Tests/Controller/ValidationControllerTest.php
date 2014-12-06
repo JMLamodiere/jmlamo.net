@@ -20,6 +20,12 @@ class ValidationControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertCount(1, $crawler->filter('.flash-message:contains("should not be blank")'));
         
+        //create (name too short -> fails)
+        $crawler = $client->request('GET', '/demo/validation/set-name/D');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("too short")'));
+        
         //create (valid name- > ok)
         $crawler = $client->request('GET', '/demo/validation/set-name/Jude');
         $this->assertTrue($client->getResponse()->isRedirect());

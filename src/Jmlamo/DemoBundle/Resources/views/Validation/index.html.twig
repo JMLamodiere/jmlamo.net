@@ -6,6 +6,7 @@
 <h1>Validation homepage</h1>
 <ul>
     <li><a href="{{ path('jmlamo_demo_validation_setname') }}">Create author with blank name (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setname', {name: "D"}) }}">Create author with a name too short (fails !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setname', {name: "Jude"}) }}">Create author with a name (ok !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setgender') }}">Create author without gender (ok !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "Adams"}) }}">Create author with a weird gender (fails !)</a></li>
