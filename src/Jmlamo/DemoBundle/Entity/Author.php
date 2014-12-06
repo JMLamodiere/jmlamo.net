@@ -41,6 +41,13 @@ class Author
      * )
      */
     private $gender;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $password;    
 
 
     /**
@@ -98,4 +105,35 @@ class Author
     {
         return $this->gender;
     }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return Author
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    
+    /**
+     * @Assert\True(message = "The password cannot match your name")
+     */
+    public function isPasswordLegal()
+    {
+        return $this->name != $this->password;
+    }    
 }

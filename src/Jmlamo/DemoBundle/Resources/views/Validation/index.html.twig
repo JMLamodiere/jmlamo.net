@@ -11,5 +11,7 @@
     <li><a href="{{ path('jmlamo_demo_validation_setgender') }}">Create author without gender (ok !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "Adams"}) }}">Create author with a weird gender (fails !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setgender', {gender: "male"}) }}">Create author with a valid gender (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setpassword', {password: "Jude"}) }}">Illegal Password : same as name</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setpassword', {password: "azerty"}) }}">Legal password</a></li>
 </ul>
 {% endblock %}

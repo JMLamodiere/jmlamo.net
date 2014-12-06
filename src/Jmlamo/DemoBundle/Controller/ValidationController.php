@@ -89,6 +89,38 @@ class ValidationController extends Controller
         }
         
         return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
-    }    
+    }
+    
+    /**
+     * @Route("/validation/set-password/{password}")
+     */
+    public function setPasswordAction(Request $request, $password)
+    {
+        $validator = $this->get('validator');
+        $session = $request->getSession();
+        
+        $author = new Author();
+        $author->setName('Jude');
+        
+        $author->setPassword($password);
+        
+        $errors = $validator->validate($author);
+        
+        if (count($errors) > 0) {
+            $session->getFlashBag()->add(
+                'notice',
+                // @see __toString()
+                (string) $errors
+            );
+            
+        } else {
+            $session->getFlashBag()->add(
+                'notice',
+                'Password is legal !'
+            );
+        }
+        
+        return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
+    }
 
 }

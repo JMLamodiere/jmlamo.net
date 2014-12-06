@@ -49,6 +49,18 @@ class ValidationControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
         $this->assertCount(1, $crawler->filter('.flash-message:contains("is valid !")'));
+        
+        //illegal password
+        $crawler = $client->request('GET', '/demo/validation/set-password/Jude');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("cannot match your name")'));
+        
+        //legal password
+        $crawler = $client->request('GET', '/demo/validation/set-password/azerty');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("is legal")'));        
     }
 
 }
