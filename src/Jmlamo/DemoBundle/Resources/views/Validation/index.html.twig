@@ -19,5 +19,6 @@
     <li><a href="{{ path('jmlamo_demo_validation_setregistrationpassword', {password: "azerty"}) }}">Legal password during registration</a></li>    
     <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "D", gender: "Adams"}) }}">Invalid name and gender. First notice.</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "Jude", gender: "Adams"}) }}">Valid name but invalid gender. Second notice.</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "Jude", gender: "male"}) }}">Valid name and gender (ok !)</a></li>
 </ul>
 {% endblock %}

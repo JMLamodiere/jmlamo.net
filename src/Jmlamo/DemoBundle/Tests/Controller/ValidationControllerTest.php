@@ -99,6 +99,12 @@ class ValidationControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertCount(0, $crawler->filter('.flash-message:contains("value is too short")'));
         $this->assertCount(1, $crawler->filter('.flash-message:contains("Choose a valid gender")'));
+        
+        //Valid name and gender
+        $crawler = $client->request('GET', '/demo/validation/set-name-and-gender/Jude/male');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("Both rules are valid")'));
     }
 
 }
