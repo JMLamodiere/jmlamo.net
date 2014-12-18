@@ -105,6 +105,30 @@ class ValidationControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
         $this->assertCount(1, $crawler->filter('.flash-message:contains("Both rules are valid")'));
+        
+        //Simple user, no IBAN
+        $crawler = $client->request('GET', '/demo/validation/set-iban/0');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("IBAN not required")'));
+        
+        //Simple user, invalid iban
+        $crawler = $client->request('GET', '/demo/validation/set-iban/0/AAA');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("not a valid International Bank Account Number")'));
+        
+        //Premium user, no IBAN
+        $crawler = $client->request('GET', '/demo/validation/set-iban/1');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("IBAN required for premium users")'));
+        
+        //Premium user, valid iban
+        $crawler = $client->request('GET', '/demo/validation/set-iban/1/FR1420041010050500013M02606');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("IBAN ok")'));
     }
 
 }

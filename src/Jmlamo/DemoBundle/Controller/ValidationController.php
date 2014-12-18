@@ -194,5 +194,46 @@ class ValidationController extends Controller
         
         return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
     }
+    
+    /**
+     * @Route("/validation/set-iban/{premium}/{iban}")
+     */
+    public function setIbanAction(Request $request, $premium, $iban = null)
+    {
+        $validator = $this->get('validator');
+        $session = $request->getSession();
+    
+        $author = new Author();
+        $author->setName('Cresus');
+        
+        $author->setPremium((boolean) $premium);
+        $author->setIban($iban);
+    
+        $errors = $validator->validate($author, null, $author->getGroupSequence());
+    
+        if (count($errors) > 0) {
+            $session->getFlashBag()->add(
+                'notice',
+                // @see __toString()
+                (string) $errors
+            );
+    
+        } else {
+            $premium = $author->getPremium();
+            if ($premium) {
+                $session->getFlashBag()->add(
+                    'notice',
+                    'Premium user, IBAN ok'
+                );
+            } else {
+                $session->getFlashBag()->add(
+                    'notice',
+                    'Classic user, IBAN not required'
+                );
+            }
+        }
+    
+        return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
+    }    
 
 }

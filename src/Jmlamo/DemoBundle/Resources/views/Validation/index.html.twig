@@ -20,5 +20,9 @@
     <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "D", gender: "Adams"}) }}">Invalid name and gender. First notice.</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "Jude", gender: "Adams"}) }}">Valid name but invalid gender. Second notice.</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setnameandgender', {name: "Jude", gender: "male"}) }}">Valid name and gender (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "0"}) }}">Simple user, no IBAN (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "0", iban: "11"}) }}">Simple user, invalid iban (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "1"}) }}">Premium user, no IBAN (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "1", iban: "FR1420041010050500013M02606"}) }}">Premium user, valid iban (ok !)</a></li>
 </ul>
 {% endblock %}

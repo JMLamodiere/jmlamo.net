@@ -4,6 +4,7 @@ namespace Jmlamo\DemoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
  * Author
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @Assert\GroupSequence({"Author", "Strict"})
  */
-class Author
+class Author implements GroupSequenceProviderInterface
 {
     /**
      * @var integer
@@ -63,7 +64,11 @@ class Author
      * @var string
      *
      * @ORM\Column(type="string", length=34, nullable=true)
-     * @Assert\NotBlank(groups={"registration"})
+     * @Assert\NotBlank(
+     *     groups = {"Premium"},
+     *     message = "IBAN required for premium users"
+     * )
+     * @Assert\Iban
      */
     private $iban;
 
@@ -176,6 +181,16 @@ class Author
     {
         return $this->premium;
     }
+    
+    /**
+     * Is premium
+     *
+     * @return boolean
+     */
+    public function isPremium()
+    {
+        return (boolean) $this->premium;
+    }    
 
     /**
      * Set iban
@@ -199,4 +214,19 @@ class Author
     {
         return $this->iban;
     }
+    
+    /**
+     * @return array
+     */
+    public function getGroupSequence()
+    {
+        $groups = array('Author');
+        
+        if ($this->isPremium()) {
+            $groups[] = 'Premium';
+        }
+        
+        return $groups;
+    }
+
 }
