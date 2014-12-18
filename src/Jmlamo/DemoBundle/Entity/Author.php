@@ -52,6 +52,20 @@ class Author
      */
     private $password;    
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $premium = false;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=34, nullable=true)
+     * @Assert\NotBlank(groups={"registration"})
+     */
+    private $iban;
 
     /**
      * Get id
@@ -139,4 +153,50 @@ class Author
     {
         return $this->name != $this->password;
     }    
+
+    /**
+     * Set premium
+     *
+     * @param boolean $premium
+     * @return Author
+     */
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
+
+        return $this;
+    }
+
+    /**
+     * Get premium
+     *
+     * @return boolean 
+     */
+    public function getPremium()
+    {
+        return $this->premium;
+    }
+
+    /**
+     * Set iban
+     *
+     * @param string $iban
+     * @return Author
+     */
+    public function setIban($iban)
+    {
+        $this->iban = $iban;
+
+        return $this;
+    }
+
+    /**
+     * Get iban
+     *
+     * @return string 
+     */
+    public function getIban()
+    {
+        return $this->iban;
+    }
 }
