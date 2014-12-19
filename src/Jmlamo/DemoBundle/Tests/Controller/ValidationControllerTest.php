@@ -129,6 +129,24 @@ class ValidationControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
         $this->assertCount(1, $crawler->filter('.flash-message:contains("IBAN ok")'));
+        
+        //Invalid email
+        $crawler = $client->request('GET', '/demo/validation/check-email/221b%20baker%20street');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("Invalid email address")'));
+        
+        //Valid email format, but invalid domain
+        $crawler = $client->request('GET', '/demo/validation/check-email/herlock@sholmes404.net/1');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("code 2")'));
+        
+        //Same but without domain check
+        $crawler = $client->request('GET', '/demo/validation/check-email/herlock@sholmes404.net');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("email is valid")'));
     }
 
 }

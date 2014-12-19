@@ -24,5 +24,8 @@
     <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "0", iban: "11"}) }}">Simple user, invalid iban (fails !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "1"}) }}">Premium user, no IBAN (fails !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_setiban', {premium: "1", iban: "FR1420041010050500013M02606"}) }}">Premium user, valid iban (ok !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_checkemail', {email: "221b baker street"}) }}">Invalid email (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_checkemail', {email: "herlock@sholmes404.net", "strict": true}) }}">Valid email format, but invalid domain (fails !)</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_checkemail', {email: "herlock@sholmes404.net"}) }}">Same but without domain check (ok !)</a></li>
 </ul>
 {% endblock %}

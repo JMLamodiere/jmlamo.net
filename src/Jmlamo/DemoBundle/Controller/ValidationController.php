@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Email;
 use Jmlamo\DemoBundle\Entity\Author;
 
 class ValidationController extends Controller
@@ -234,6 +235,44 @@ class ValidationController extends Controller
         }
     
         return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
-    }    
+    }
+    
+    /**
+     * @Route("/validation/check-email/{email}/{strict}")
+     */
+    public function checkEmailAction(Request $request, $email, $strict = false)
+    {
+        $validator = $this->get('validator');
+        $session = $request->getSession();
+        
+        $emailConstraint = new Email();
+
+        $emailConstraint->message = 'Invalid email address';
+        
+        if ($strict) {
+            $emailConstraint->checkMX = true;
+            $emailConstraint->checkHost = true;
+        }
+        
+        $errors = $validator->validate(
+            $email,
+            $emailConstraint
+        );
+        
+        if (count($errors) > 0) {
+            $session->getFlashBag()->add(
+                'notice',
+                // @see __toString()
+                (string) $errors
+            );
+        } else {
+            $session->getFlashBag()->add(
+                'notice',
+                'This email is valid !'
+            );
+        }
+        
+        return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
+    }
 
 }
