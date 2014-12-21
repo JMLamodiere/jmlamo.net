@@ -27,7 +27,9 @@
     <li><a href="{{ path('jmlamo_demo_validation_checkemail', {email: "221b baker street"}) }}">Invalid email (fails !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_checkemail', {email: "herlock@sholmes404.net", "strict": true}) }}">Valid email format, but invalid domain (fails !)</a></li>
     <li><a href="{{ path('jmlamo_demo_validation_checkemail', {email: "herlock@sholmes404.net"}) }}">Same but without domain check (ok !)</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_checkbic', {bic: "BicShaver"}) }}">Invalid Bank Identifier Code</a></li>
-    <li><a href="{{ path('jmlamo_demo_validation_checkbic', {bic: "CEPAFRPP118"}) }}">Valid Bic Identifier Code</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_checkbic', {bic: "BicShaver"}) }}">Direct test invalid BIC</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_checkbic', {bic: "CEPAFRPP118"}) }}">Direct test valid BIC</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setbic', {bic: "BicShaver"}) }}">Set invalid BIC</a></li>
+    <li><a href="{{ path('jmlamo_demo_validation_setbic', {bic: "CEPAFRPP118"}) }}">Set valid BIC</a></li>
 </ul>
 {% endblock %}

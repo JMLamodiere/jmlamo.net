@@ -305,6 +305,37 @@ class ValidationController extends Controller
         }
     
         return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
-    }    
+    }
+    
+    /**
+     * @Route("/validation/set-bic/{bic}")
+     */
+    public function setBicAction(Request $request, $bic)
+    {
+        $validator = $this->get('validator');
+        $session = $request->getSession();
+    
+        $author = new Author();
+        $author->setName('BIC Tester');
+        $author->setBic($bic);
+    
+        $errors = $validator->validate($author);
+    
+        if (count($errors) > 0) {
+            $session->getFlashBag()->add(
+                'notice',
+                // @see __toString()
+                (string) $errors
+            );
+    
+        } else {
+            $session->getFlashBag()->add(
+                'notice',
+                sprintf('%s is valid !', $author->getBic())
+            );
+        }
+    
+        return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
+    }
 
 }

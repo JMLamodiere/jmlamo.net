@@ -158,7 +158,19 @@ class ValidationControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/demo/validation/check-bic/CEPAFRPP118');
         $this->assertTrue($client->getResponse()->isRedirect());
         $crawler = $client->followRedirect();
-        $this->assertCount(1, $crawler->filter('.flash-message:contains("BIC is valid")'));        
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("BIC is valid")'));
+        
+        //Invalid BIC
+        $crawler = $client->request('GET', '/demo/validation/set-bic/BicShaver');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("not a valid Bank Identifier Code")'));
+        
+        //Valid BIC
+        $crawler = $client->request('GET', '/demo/validation/set-bic/CEPAFRPP118');
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $crawler = $client->followRedirect();
+        $this->assertCount(1, $crawler->filter('.flash-message:contains("is valid")'));
     }
 
 }

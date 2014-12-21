@@ -4,6 +4,7 @@ namespace Jmlamo\DemoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Jmlamo\DemoBundle\Validator\Constraints as JmlamoAssert;
 use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
@@ -71,6 +72,14 @@ class Author implements GroupSequenceProviderInterface
      * @Assert\Iban
      */
     private $iban;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=13, nullable=true)
+     * @JmlamoAssert\Bic
+     */
+    private $bic;
 
     /**
      * Get id
@@ -229,4 +238,27 @@ class Author implements GroupSequenceProviderInterface
         return $groups;
     }
 
+
+    /**
+     * Set bic
+     *
+     * @param string $bic
+     * @return Author
+     */
+    public function setBic($bic)
+    {
+        $this->bic = $bic;
+
+        return $this;
+    }
+
+    /**
+     * Get bic
+     *
+     * @return string 
+     */
+    public function getBic()
+    {
+        return $this->bic;
+    }
 }
