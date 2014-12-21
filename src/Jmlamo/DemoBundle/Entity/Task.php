@@ -1,9 +1,19 @@
 <?php
 namespace Jmlamo\DemoBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Task
 {
+    /**
+     * @Assert\NotBlank()
+     */
     protected $task;
+    
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Type("\DateTime")
+     */
     protected $dueDate;
 
     public function getTask()
