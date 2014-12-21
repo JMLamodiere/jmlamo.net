@@ -27,6 +27,8 @@ class FormController extends Controller
      */
     public function newAction(Request $request)
     {
+        $session = $request->getSession();
+        
         // create a task and give it some dummy data for this example
         $task = new Task();
         $task->setTask('Write a blog post');
@@ -36,8 +38,26 @@ class FormController extends Controller
         ->add('task', 'text')
         ->add('dueDate', 'date')
         ->add('save', 'submit', array('label' => 'Create Task'))
+        ->add('saveAndAdd', 'submit', array('label' => 'Save and Add'))
         ->getForm();
     
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            // perform some action, such as saving the task to the database
+            
+            $message = $form->get('saveAndAdd')->isClicked()
+                ? 'Task has been saved'
+                : 'Task is valid';
+            
+            $session->getFlashBag()->add(
+                'notice',
+                $message
+            );
+            
+            return $this->redirect($this->generateUrl('jmlamo_demo_form_index'));
+        }
+        
         return array(
             'form' => $form->createView(),
         );
