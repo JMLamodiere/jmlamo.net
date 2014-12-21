@@ -1,0 +1,10 @@
+{% extends 'JmlamoDemoBundle::base.html.twig' %}
+
+{% block title %}New task{% endblock %}
+
+{% block body %}
+<h1>New task</h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+{% endblock %}
