@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\Email;
 use Jmlamo\DemoBundle\Entity\Author;
+use Jmlamo\DemoBundle\Validator\Constraints\Bic;
 
 class ValidationController extends Controller
 {
@@ -274,5 +275,36 @@ class ValidationController extends Controller
         
         return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
     }
+    
+    /**
+     * @Route("/validation/check-bic/{bic}")
+     */
+    public function checkBicAction(Request $request, $bic)
+    {
+        $validator = $this->get('validator');
+        $session = $request->getSession();
+    
+        $bicConstraint = new Bic();
+    
+        $errors = $validator->validate(
+            $bic,
+            $bicConstraint
+        );
+    
+        if (count($errors) > 0) {
+            $session->getFlashBag()->add(
+                'notice',
+                // @see __toString()
+                (string) $errors
+            );
+        } else {
+            $session->getFlashBag()->add(
+                'notice',
+                'This BIC is valid !'
+            );
+        }
+    
+        return $this->redirect($this->generateUrl('jmlamo_demo_validation_index'));
+    }    
 
 }
