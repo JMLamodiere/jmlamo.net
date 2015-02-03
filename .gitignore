@@ -6,13 +6,16 @@
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
+/app/config/parameters.yml.jenkins.*
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
+/app/build/
 /build/
 /vendor/
 /bin/
 /composer.phar
+/cache.properties
 .buildpath
 .project
 *~
