@@ -1,73 +1,88 @@
 {
-    "name": "jmlamodiere/jmlamo.net",
-    "license": "MIT",
-    "type": "project",
-    "description": "jmlamo.net : my personnal demo website",
-    "homepage": "http://github.com/JMLamodiere/jmlamo.net",
-    "authors": [
-        {
-            "name": "Jean-Marie Lamodière",
-            "role": "Developer"
-        }
-    ],
-    "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
-    },
-    "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.6.*",
-        "doctrine/orm": "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle": "~1.2",
-        "doctrine/migrations": "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
-        "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "twig/extensions": "~1.0",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~3.0",
-        "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "sensiolabs/security-checker": "~2.0"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3"
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "bin/security-checker security:check"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
-            "bin/security-checker security:check"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "symfony-assets-install": "symlink",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.6-dev"
-        }
-    }
+	"name" : "jmlamodiere/jmlamo.net",
+	"license" : "MIT",
+	"type" : "project",
+	"description" : "jmlamo.net : my personnal demo website",
+	"homepage" : "http://github.com/JMLamodiere/jmlamo.net",
+	"authors" : [{
+			"name" : "Jean-Marie Lamodière",
+			"role" : "Developer"
+		}
+	],
+	"autoload" : {
+		"psr-0" : {
+			"" : "src/",
+			"SymfonyStandard" : "app/"
+		}
+	},
+	"require" : {
+		"php" : ">=5.3.3",
+		"symfony/symfony" : "2.6.*",
+		"doctrine/orm" : "~2.2,>=2.2.3",
+		"doctrine/doctrine-bundle" : "~1.2",
+		"doctrine/migrations" : "1.0.*@dev",
+		"doctrine/doctrine-migrations-bundle" : "2.1.*@dev",
+		"doctrine/doctrine-fixtures-bundle" : "2.2.*",
+		"twig/extensions" : "~1.0",
+		"symfony/assetic-bundle" : "~2.3",
+		"symfony/swiftmailer-bundle" : "~2.3",
+		"symfony/monolog-bundle" : "~2.4",
+		"sensio/distribution-bundle" : "~3.0",
+		"sensio/framework-extra-bundle" : "~3.0",
+		"incenteev/composer-parameter-handler" : "~2.0",
+		"sensiolabs/security-checker" : "~2.0",
+		"twitter/bootstrap" : "~3.3",
+		"leafo/lessphp": "dev-master",
+		"jquery/jquery": "1.11.2"
+	},
+	"require-dev" : {
+		"sensio/generator-bundle" : "~2.3"
+	},
+	"repositories": [
+	    {
+	        "type": "package",
+	        "package": {
+	            "name": "jquery/jquery",
+	            "version": "1.11.2",
+	            "dist": {
+	                "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js",
+	                "type": "file"
+	            }
+	        }
+	    }
+	],
+	"scripts" : {
+		"post-install-cmd" : [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+			"bin/security-checker security:check"
+		],
+		"post-update-cmd" : [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+			"bin/security-checker security:check"
+		]
+	},
+	"config" : {
+		"bin-dir" : "bin"
+	},
+	"extra" : {
+		"symfony-app-dir" : "app",
+		"symfony-web-dir" : "web",
+		"symfony-assets-install" : "symlink",
+		"incenteev-parameters" : {
+			"file" : "app/config/parameters.yml"
+		},
+		"branch-alias" : {
+			"dev-master" : "2.6-dev"
+		}
+	}
 }
