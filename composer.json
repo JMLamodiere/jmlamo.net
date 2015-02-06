@@ -32,7 +32,6 @@
 		"incenteev/composer-parameter-handler" : "~2.0",
 		"sensiolabs/security-checker" : "~2.0",
 		"twitter/bootstrap" : "~3.3",
-		"oyejorge/less.php": "~1.7",
 		"jquery/jquery": "1.11.2"
 	},
 	"require-dev" : {
