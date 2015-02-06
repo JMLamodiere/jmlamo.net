@@ -3,7 +3,10 @@
 
 {% block stylesheets %}
 {{ parent() }}
-{% stylesheets 'bundles/jmlamodemo/css/*' filter='cssrewrite' %}
+{% stylesheets
+    '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
+    'bundles/jmlamodemo/css/*'
+    filter='less,cssrewrite' output='css/compiled/all.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
 {% endblock %}
