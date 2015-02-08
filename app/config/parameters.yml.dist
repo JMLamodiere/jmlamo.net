@@ -22,3 +22,8 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    # node
+    node_bin:          /usr/bin/node
+    node_modules:      /usr/local/lib/node_modules
+
